@@ -9,21 +9,21 @@ export class LocalStorage extends Storage
     }
 
     // eslint-disable-next-line no-unused-vars
-    putRaw(key, rawValue, options = {}) {
-        this.handler.setItem(key, rawValue)
+    putRaw(rawKey, rawValue, options = {}) {
+        this.handler.setItem(rawKey, rawValue)
         return this
     }
 
-    has(key) {
-        return key in this.handler
+    hasRaw(rawKey) {
+        return rawKey in this.handler
     }
 
-    getRaw(key) {
-        return this.handler.getItem(key)
+    getRaw(rawKey) {
+        return this.handler.getItem(rawKey)
     }
 
-    remove(key) {
-        this.handler.removeItem(key)
+    removeRaw(rawKey) {
+        this.handler.removeItem(rawKey)
         return this
     }
 }

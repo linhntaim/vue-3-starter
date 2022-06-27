@@ -1,12 +1,19 @@
+import {registerPropertyFactory} from '@/app/support/helpers'
 import {RequestManager} from './request-manager'
-import {Singleton} from '../singleton'
 
 export function createService(extend = {}) {
     return {
         install(app) {
-            const singleton = new Singleton(app)
-            app.config.globalProperties.$request = new RequestManager(app).extend(extend)
-            app.config.globalProperties.$service = ServiceClass => singleton.make(ServiceClass)
+            registerPropertyFactory(
+                app.config.globalProperties,
+                '$request',
+                () => new RequestManager(app._instance.proxy).extend(extend),
+            )
+            registerPropertyFactory(
+                app.config.globalProperties,
+                '$service',
+                props => ServiceClass => props.$singleton.make(ServiceClass),
+            )
         },
     }
 }

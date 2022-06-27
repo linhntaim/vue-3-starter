@@ -14,41 +14,31 @@ export const routes = [
         },
         children: [
             {
+                path: 'clear-site-data',
+                name: 'clear_site_data',
+                component: () => import(/* webpackChunkName: "view-clear-site-data" */ '@/resources/views/pages/ClearSiteData'),
+            },
+            {
                 path: 'error',
                 component: BaseError,
                 children: [
                     {
                         path: 'connection-lost',
                         name: 'connection_lost',
-                        component: () => import('@/resources/views/errors/ConnectionLost'),
+                        component: () => import(/* webpackChunkName: "view-error-connection-lost" */ '@/resources/views/errors/ConnectionLost'),
                     },
                     {
                         path: '401',
                         name: 'unauthenticated',
-                        component: () => import('@/resources/views/errors/Unauthenticated'),
+                        component: () => import(/* webpackChunkName: "view-error-unauthenticated" */ '@/resources/views/errors/Unauthenticated'),
                     },
                     {
                         path: '404',
                         name: 'not_found',
-                        component: () => import('@/resources/views/errors/NotFound'),
+                        component: () => import(/* webpackChunkName: "view-error-not-found" */ '@/resources/views/errors/NotFound'),
                     },
+                    //
                 ],
-            },
-            {
-                path: 'clear-site-data',
-                name: 'clear_site_data',
-                component: () => import('@/resources/views/pages/ClearSiteData'),
-            },
-            //
-            {
-                path: '/',
-                name: 'root',
-                component: () => import('@/resources/views/pages/Home'),
-            },
-            {
-                path: 'about',
-                name: 'about',
-                component: () => import('@/resources/views/pages/About'),
             },
             {
                 path: 'auth',
@@ -61,60 +51,73 @@ export const routes = [
                     {
                         path: 'login',
                         name: 'login',
-                        component: () => import('@/resources/views/pages/auth/Login'),
+                        component: () => import(/* webpackChunkName: "view-auth-login" */ '@/resources/views/pages/auth/Login'),
                     },
                     {
                         path: 'register',
-                        component: () => import('@/resources/views/pages/auth/register/Base'),
+                        component: () => import(/* webpackChunkName: "view-auth-register-base" */ '@/resources/views/pages/auth/register/Base'),
                         children: [
                             {
                                 path: '',
                                 name: 'register',
-                                component: () => import('@/resources/views/pages/auth/register/Index'),
+                                component: () => import(/* webpackChunkName: "view-auth-register-index" */ '@/resources/views/pages/auth/register/Index'),
                             },
                             {
                                 path: 'success',
                                 name: 'register.success',
-                                component: () => import('@/resources/views/pages/auth/register/Success'),
+                                component: () => import(/* webpackChunkName: "view-auth-register-success" */ '@/resources/views/pages/auth/register/Success'),
                             },
                         ],
                     },
                     {
                         path: 'forgot-password',
-                        component: () => import('@/resources/views/pages/auth/forgot-password/Base'),
+                        component: () => import(/* webpackChunkName: "view-auth-forgot-password-base" */ '@/resources/views/pages/auth/forgot-password/Base'),
                         children: [
                             {
                                 path: '',
                                 name: 'password.request',
-                                component: () => import('@/resources/views/pages/auth/forgot-password/Index'),
+                                component: () => import(/* webpackChunkName: "view-auth-forgot-password-index" */ '@/resources/views/pages/auth/forgot-password/Index'),
                             },
                             {
                                 path: 'success',
                                 name: 'password.request.success',
-                                component: () => import('@/resources/views/pages/auth/forgot-password/Success'),
+                                component: () => import(/* webpackChunkName: "view-auth-forgot-password-success" */ '@/resources/views/pages/auth/forgot-password/Success'),
                             },
                         ],
                     },
                     {
                         path: 'reset-password',
-                        component: () => import('@/resources/views/pages/auth/reset-password/Base'),
+                        component: () => import(/* webpackChunkName: "view-auth-reset-password-base" */ '@/resources/views/pages/auth/reset-password/Base'),
                         children: [
                             {
                                 path: ':token',
                                 name: 'password.reset',
-                                component: () => import('@/resources/views/pages/auth/reset-password/Index'),
+                                component: () => import(/* webpackChunkName: "view-auth-reset-password-index" */ '@/resources/views/pages/auth/reset-password/Index'),
                             },
                             {
                                 path: 'success',
                                 name: 'password.reset.success',
-                                component: () => import('@/resources/views/pages/auth/reset-password/Success'),
+                                component: () => import(/* webpackChunkName: "view-auth-reset-password-success" */ '@/resources/views/pages/auth/reset-password/Success'),
                             },
                         ],
                     },
+                    //
                 ],
             },
             {
-                path: '',
+                path: '/',
+                name: 'root',
+                component: () => import(/* webpackChunkName: "view-home" */ '@/resources/views/pages/Home'),
+            },
+            //
+            {
+                path: 'about',
+                name: 'about',
+                component: () => import(/* webpackChunkName: "view-about" */ '@/resources/views/pages/About'),
+            },
+            //
+            {
+                path: '/',
                 component: BaseBlank,
                 meta: {
                     requiresAuth: true,
@@ -124,14 +127,14 @@ export const routes = [
                     {
                         path: 'account',
                         name: 'account',
-                        component: () => import('@/resources/views/pages/me/Account'),
+                        component: () => import(/* webpackChunkName: "view-me-account" */ '@/resources/views/pages/me/Account'),
                     },
+                    //
                 ],
             },
-            //
             {
                 path: ':pathMatch(.*)*',
-                component: () => import('@/resources/views/errors/NotFound'),
+                component: () => import(/* webpackChunkName: "view-welcome" */ '@/resources/views/pages/Welcome'),
             },
         ],
     },

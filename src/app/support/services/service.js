@@ -1,10 +1,11 @@
 import {Maker} from '../maker'
 
-export class Service extends Maker {
+export class Service extends Maker
+{
     constructor(app) {
         super(app)
 
-        this.$request = this.app.config.globalProperties.$request
+        this.request = this.app.$request
     }
 
     requestDriver() {
@@ -12,7 +13,7 @@ export class Service extends Maker {
     }
 
     requester() {
-        return this.$request.driver(this.requestDriver())
+        return this.request.driver(this.requestDriver())
     }
 
     response(requested) {

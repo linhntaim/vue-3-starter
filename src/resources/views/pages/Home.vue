@@ -16,37 +16,37 @@ export default {
         HelloWorld,
     },
     beforeRouteEnter() { // cannot access `this`
-        app.$log.info('page', 'home.beforeRouteEnter')
+        app.$log.debug('page', 'home.beforeRouteEnter')
     },
     beforeRouteUpdate() {
-        this.$log.info('page', 'home.beforeRouteUpdate')
+        this.$log.debug('page', 'home.beforeRouteUpdate')
     },
     beforeRouteLeave() {
-        this.$log.info('page', 'home.beforeRouteLeave')
+        this.$log.debug('page', 'home.beforeRouteLeave')
     },
     beforeCreate() {
-        this.$log.info('page', 'home.beforeCreate')
+        this.$log.debug('page', 'home.beforeCreate')
     },
     created() {
-        this.$log.info('page', 'home.created')
+        this.$log.debug('page', 'home.created')
     },
     beforeUpdate() {
-        this.$log.info('page', 'home.beforeUpdate')
+        this.$log.debug('page', 'home.beforeUpdate')
     },
     updated() {
-        this.$log.info('page', 'home.updated')
+        this.$log.debug('page', 'home.updated')
     },
     beforeMount() {
-        this.$log.info('page', 'home.beforeMount//rendering')
+        this.$log.debug('page', 'home.beforeMount//rendering')
     },
     mounted() {
-        this.$log.info('page', 'home.mounted//rendered')
+        this.$log.debug('page', 'home.mounted//rendered')
     },
     beforeUnmount() {
-        this.$log.info('page', 'home.beforeUnmount')
+        this.$log.debug('page', 'home.beforeUnmount')
     },
     unmounted() {
-        this.$log.info('page', 'home.unmounted')
+        this.$log.debug('page', 'home.unmounted')
     },
 }
 </script>

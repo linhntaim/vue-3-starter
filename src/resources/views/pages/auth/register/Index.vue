@@ -13,18 +13,17 @@
             div(v-for="message in error.validation.email")
                 small {{ message }}
         div
-            input(v-model="password" type="password" name="password" placeholder="Password" required)
+            input(v-model="password" type="password" name="password" placeholder="Password" autocomplete="off" required)
         template(v-if="error.validation.password")
             div(v-for="message in error.validation.password")
                 small {{ message }}
         div
-            input(v-model="passwordConfirmation" type="password" name="password_confirmation" placeholder="Password Confirmation" required)
+            input(v-model="passwordConfirmation" type="password" name="password_confirmation" placeholder="Password Confirmation" autocomplete="off" required)
         button(:disabled="loading._" type="submit") Submit
 </template>
 
 <script>
 import {mapActions, mapGetters, mapMutations} from 'vuex'
-import {StarterServiceError} from '@/app/support/services'
 
 export default {
     // eslint-disable-next-line
@@ -95,17 +94,15 @@ export default {
             this.loading._ = true
             this.register({
                 login_url: this.$url.route({name: 'login'}),
-            }).then(data => {
+            }).then(() => {
                 this.loading._ = false
-                if (data instanceof StarterServiceError) {
-                    this.error.messages = data.messages
-                    if (data.data && 'validation' in data.data) {
-                        this.error.validation = data.data.validation
-                    }
-                }
-                else {
-                    this.registerSetProgressing(true)
-                    this.$router.push({name: 'register.success'})
+                this.registerSetProgressing(true)
+                this.$router.push({name: 'register.success'})
+            }).catch(err => {
+                this.loading._ = false
+                this.error.messages = err.messages
+                if (err.data && 'validation' in err.data) {
+                    this.error.validation = err.data.validation
                 }
             })
         },

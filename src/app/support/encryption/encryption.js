@@ -1,6 +1,6 @@
 import {Drivers} from '../drivers'
 import {StarterEncryptor} from './starter-encryptor'
-import {Base64Encryptor} from '@/app/support/encryption/base64-encryptor'
+import {Base64Encryptor} from './base64-encryptor'
 
 export class Encryption extends Drivers
 {

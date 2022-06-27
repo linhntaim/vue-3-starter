@@ -1,6 +1,10 @@
+import {env} from './env'
+
 export const log = {
     default: 'console',
     drivers: {
-        console: {},
+        console: {
+            level: env.VUE_APP_LOG_LEVEL || 'debug',
+        },
     },
 }

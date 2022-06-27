@@ -5,8 +5,8 @@ export class UrlGenerator extends Maker
     constructor(app) {
         super(app)
 
-        this.url = this.app.config.globalProperties.$config.app.url
-        this.router = this.app.config.globalProperties.$router
+        this.url = this.app.$config.app.url
+        this.router = this.app.$router
     }
 
     concat(...args) {

@@ -1,4 +1,5 @@
-export class Str {
+export class Str
+{
     constructor() {
         this.snakeCache = {}
         this.camelCache = {}

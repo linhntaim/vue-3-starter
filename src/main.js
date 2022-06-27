@@ -1,3 +1,3 @@
 import {app} from '@/bootstrap/app'
 
-app.$log.info('app', 'created', app)
+app.$log.debug('app', 'created', app)

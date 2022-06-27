@@ -1,4 +1,4 @@
-import {modify} from '@/app/support/helpers'
+import {modify} from '../helpers'
 
 export class Settings
 {
@@ -22,6 +22,15 @@ export class Settings
 
     applied() {
         this.appliedSettings = Object.assign({}, this.settings)
+    }
+
+    set(settings) {
+        Object.keys(settings).forEach(key => {
+            if (key in this.settings) {
+                this.settings[key] = settings[key]
+            }
+        })
+        return this
     }
 
     setLocale(locale) {

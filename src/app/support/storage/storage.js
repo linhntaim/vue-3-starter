@@ -8,12 +8,16 @@ export class Storage extends Driver
         this.encryptor = encryptor
     }
 
+    prefixKey(key) {
+        return 'prefix' in this.options ? this.options.prefix + key : key
+    }
+
     async put(key, value, options = {}) {
-        return this.putRaw(key, await this.toRawValue(this.toValue(value, options), options), options)
+        return this.putRaw(this.prefixKey(key), await this.toRawValue(this.toValue(value, options), options), options)
     }
 
     // eslint-disable-next-line no-unused-vars
-    putRaw(key, rawValue, options = {}) {
+    putRaw(rawKey, rawValue, options = {}) {
         return this
     }
 
@@ -40,12 +44,17 @@ export class Storage extends Driver
 
     // eslint-disable-next-line no-unused-vars
     has(key) {
+        return this.hasRaw(this.prefixKey(key))
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    hasRaw(rawKey) {
         return false
     }
 
     async keep(key) {
         if (this.has(key)) {
-            const got = await this.fromRawValue(this.getRaw(key))
+            const got = await this.fromRawValue(key, this.getRaw(this.prefixKey(key)))
             const value = this.fromValue(key, got.value, got.options)
             got.options.keep = true
             await this.put(key, value, got.options)
@@ -58,7 +67,7 @@ export class Storage extends Driver
             return def
         }
 
-        const got = await this.fromRawValue(key, this.getRaw(key))
+        const got = await this.fromRawValue(key, this.getRaw(this.prefixKey(key)))
         return this.fromValue(key, got.value, got.options)
     }
 
@@ -91,12 +100,17 @@ export class Storage extends Driver
     }
 
     // eslint-disable-next-line no-unused-vars
-    getRaw(key) {
+    getRaw(rawKey) {
         return null
     }
 
     // eslint-disable-next-line no-unused-vars
     remove(key) {
+        return this.removeRaw(this.prefixKey(key))
+    }
+
+    // eslint-disable-next-line no-unused-vars
+    removeRaw(rawKey) {
         return this
     }
 }

@@ -9,7 +9,7 @@ export class CookieStorage extends Storage
         this.options.flatten = true
     }
 
-    putRaw(key, rawValue, options = {}) {
+    putRaw(rawKey, rawValue, options = {}) {
         const attributes = {
             secure: /^https/.test(window.location.origin),
             sameSite: 'lax',
@@ -35,22 +35,22 @@ export class CookieStorage extends Storage
         if ('sameSite' in options) {
             attributes.sameSite = options.sameSite
         }
-        Cookies.set(key, rawValue, attributes)
+        Cookies.set(rawKey, rawValue, attributes)
         return this
     }
 
-    has(key) {
+    hasRaw(rawKey) {
         return (cookies => cookies.length
-            ? cookies.some(cookie => key === decodeURIComponent(cookie.split('=')[0]))
+            ? cookies.some(cookie => rawKey === decodeURIComponent(cookie.split('=')[0]))
             : false)(document.cookie ? document.cookie.split('; ') : [])
     }
 
-    getRaw(key) {
-        return Cookies.get(key)
+    getRaw(rawKey) {
+        return Cookies.get(rawKey)
     }
 
-    remove(key) {
-        Cookies.remove(key)
+    removeRaw(rawKey) {
+        Cookies.remove(rawKey)
         return this
     }
 }

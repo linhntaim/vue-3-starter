@@ -12,7 +12,6 @@
 
 <script>
 import {mapActions, mapGetters, mapMutations} from 'vuex'
-import {StarterServiceError} from '@/app/support/services'
 
 export default {
     // eslint-disable-next-line
@@ -64,17 +63,15 @@ export default {
                         token: '{token}',
                     },
                 }),
-            }).then(data => {
+            }).then(() => {
                 this.loading._ = false
-                if (data instanceof StarterServiceError) {
-                    this.error.messages = data.messages
-                    if (data.data && 'validation' in data.data) {
-                        this.error.validation = data.data.validation
-                    }
-                }
-                else {
-                    this.forgotPasswordSetProgressing(true)
-                    this.$router.push({name: 'password.request.success'})
+                this.forgotPasswordSetProgressing(true)
+                this.$router.push({name: 'password.request.success'})
+            }).catch(err => {
+                this.loading._ = false
+                this.error.messages = err.messages
+                if (err.data && 'validation' in err.data) {
+                    this.error.validation = err.data.validation
                 }
             })
         },

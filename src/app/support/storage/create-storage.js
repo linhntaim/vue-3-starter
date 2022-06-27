@@ -1,12 +1,24 @@
+import {registerPropertyFactory} from '@/app/support/helpers'
 import {StorageManager} from './storage-manager'
 
 export function createStorage(extend = {}) {
     return {
         install(app) {
-            const storageManager = new StorageManager(app).extend(extend)
-            app.config.globalProperties.$storageManager = storageManager
-            app.config.globalProperties.$storage = storageManager.driver()
-            app.config.globalProperties.$cookie = storageManager.driver('cookie')
+            registerPropertyFactory(
+                app.config.globalProperties,
+                '$storageManager',
+                () => new StorageManager(app._instance.proxy).extend(extend),
+            )
+            registerPropertyFactory(
+                app.config.globalProperties,
+                '$storage',
+                props => props.$storageManager.driver(),
+            )
+            registerPropertyFactory(
+                app.config.globalProperties,
+                '$cookie',
+                props => props.$storageManager.driver('cookie'),
+            )
         },
     }
 }

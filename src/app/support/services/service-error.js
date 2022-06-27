@@ -1,4 +1,5 @@
-export class ServiceError {
+export class ServiceError
+{
     constructor(error) {
         this.error = error
         this.message = null

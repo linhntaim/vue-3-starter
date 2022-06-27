@@ -1,5 +1,5 @@
 import {Drivers} from '../drivers'
-import {StorageCache} from '@/app/support/cache/storage-cache'
+import {StorageCache} from './storage-cache'
 
 export class CacheManager extends Drivers
 {
@@ -9,8 +9,8 @@ export class CacheManager extends Drivers
 
     storage(storageDriver) {
         return storageDriver
-            ? this.app.config.globalProperties.$storageManager.driver(storageDriver)
-            : this.app.config.globalProperties.$storage
+            ? this.app.$storageManager.driver(storageDriver)
+            : this.app.$storage
     }
 
     createStorage() {

@@ -1,4 +1,7 @@
-export class Middleware {
+import {Maker} from '../maker'
+
+export class Middleware extends Maker
+{
     beforeEach(to, from, next) {
         next()
     }

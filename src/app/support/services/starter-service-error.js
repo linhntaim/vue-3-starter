@@ -1,7 +1,8 @@
-import {ServiceError} from './service-error'
 import {AxiosError} from 'axios'
+import {ServiceError} from './service-error'
 
-export class StarterServiceError extends ServiceError {
+export class StarterServiceError extends ServiceError
+{
     parseError() {
         if (this.error instanceof AxiosError) {
             this.parseErrorResponse(this.error.response.data)

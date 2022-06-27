@@ -9,21 +9,21 @@ export class MemoryStorage extends Storage
     }
 
     // eslint-disable-next-line no-unused-vars
-    putRaw(key, rawValue, options = {}) {
-        this.data[key] = rawValue
+    putRaw(rawKey, rawValue, options = {}) {
+        this.data[rawKey] = rawValue
         return this
     }
 
-    has(key) {
-        return key in this.data
+    hasRaw(rawKey) {
+        return rawKey in this.data
     }
 
-    getRaw(key) {
-        return this.data[key]
+    getRaw(rawKey) {
+        return this.data[rawKey]
     }
 
-    remove(key) {
-        delete this.data[key]
+    removeRaw(rawKey) {
+        delete this.data[rawKey]
         return this
     }
 }

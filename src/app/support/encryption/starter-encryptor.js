@@ -1,5 +1,5 @@
-import {Encryptor} from '@/app/support/encryption/encryptor'
-import {EncryptService, ServiceError} from '@/app/support/services'
+import {Encryptor} from './encryptor'
+import {EncryptService} from '../services'
 
 export class StarterEncryptor extends Encryptor
 {
@@ -10,18 +10,12 @@ export class StarterEncryptor extends Encryptor
     }
 
     async encrypt(data) {
-        const response = await this.app.config.globalProperties.$service(EncryptService).encrypt(data)
-        if (response instanceof ServiceError) {
-            throw 'Encrypt failed.'
-        }
+        const response = await this.app.$service(EncryptService).encrypt(data)
         return response.encrypted
     }
 
     async decrypt(data) {
-        const response = await this.app.config.globalProperties.$service(EncryptService).decrypt(data)
-        if (response instanceof ServiceError) {
-            throw 'Decrypt failed.'
-        }
+        const response = await this.app.$service(EncryptService).decrypt(data)
         return response.decrypted
     }
 }

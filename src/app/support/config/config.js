@@ -1,6 +1,7 @@
 import {dataGet} from '../helpers'
 
-export class Config {
+export class Config
+{
     constructor(configs) {
         Object.keys(configs).forEach(key => this[key] = configs[key])
     }

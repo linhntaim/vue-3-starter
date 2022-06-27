@@ -31,37 +31,37 @@ export default {
         },
     },
     beforeRouteEnter() { // cannot access `this`
-        app.$log.info('page', 'about.beforeRouteEnter')
+        app.$log.debug('page', 'about.beforeRouteEnter')
     },
     beforeRouteUpdate() {
-        this.$log.info('page', 'about.beforeRouteUpdate')
+        this.$log.debug('page', 'about.beforeRouteUpdate')
     },
     beforeRouteLeave() {
-        this.$log.info('page', 'about.beforeRouteLeave')
+        this.$log.debug('page', 'about.beforeRouteLeave')
     },
     beforeCreate() {
-        this.$log.info('page', 'about.beforeCreate')
+        this.$log.debug('page', 'about.beforeCreate')
     },
     created() {
-        this.$log.info('page', 'about.created')
+        this.$log.debug('page', 'about.created')
     },
     beforeUpdate() {
-        this.$log.info('page', 'about.beforeUpdate')
+        this.$log.debug('page', 'about.beforeUpdate')
     },
     updated() {
-        this.$log.info('page', 'about.updated')
+        this.$log.debug('page', 'about.updated')
     },
     beforeMount() {
-        this.$log.info('page', 'about.beforeMount//rendering')
+        this.$log.debug('page', 'about.beforeMount//rendering')
     },
     mounted() {
-        this.$log.info('page', 'about.mounted//rendered')
+        this.$log.debug('page', 'about.mounted//rendered')
     },
     beforeUnmount() {
-        this.$log.info('page', 'about.beforeUnmount')
+        this.$log.debug('page', 'about.beforeUnmount')
     },
     unmounted() {
-        this.$log.info('page', 'about.unmounted')
+        this.$log.debug('page', 'about.unmounted')
     },
 }
 </script>

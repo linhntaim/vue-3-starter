@@ -1,6 +1,6 @@
 import {Drivers} from '../drivers'
 import {LocalStorage} from './local-storage'
-import {CookieStorage} from '@/app/support/storage/cookie-storage'
+import {CookieStorage} from './cookie-storage'
 
 export class StorageManager extends Drivers
 {
@@ -10,8 +10,8 @@ export class StorageManager extends Drivers
 
     encryptor(encryptorDriver) {
         return encryptorDriver
-            ? this.app.config.globalProperties.$encryption.driver(encryptorDriver)
-            : this.app.config.globalProperties.$encryptor
+            ? this.app.$encryption.driver(encryptorDriver)
+            : this.app.$encryptor
     }
 
     createLocal() {

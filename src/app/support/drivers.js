@@ -4,7 +4,7 @@ export class Drivers
 {
     constructor(app, configKey, defaultDriver = null) {
         this.app = app
-        this.config = app.config.globalProperties.$config
+        this.config = app.$config
         this.configKey = configKey
         this.drivers = {}
         this.extended = {}
