@@ -17,10 +17,10 @@ export const localization = {
                 .setLocaleApply((locale, changed) => {
                     if (changed) {
                         document.querySelector('html').setAttribute('lang', locale)
-                        props.$request.with('starter', axios => {
+                        props.$request.mod('starter', axios => {
                             axios.defaults.headers.common['Accept-Language'] = locale
                             return axios
-                        }, 'header.accept-language')
+                        })
                         props.$log.debug('locale', 'applied', locale)
                     }
                     else {
@@ -29,14 +29,14 @@ export const localization = {
                 })
                 .setCommonApply(async (settings, changes) => {
                     if (Object.keys(changes).some(key => changes[key])) {
-                        props.$request.with('starter', axios => {
+                        props.$request.mod('starter', axios => {
                             axios.defaults.headers.common['X-Settings'] = (() => {
                                 const values = {}
                                 Object.keys(settings).forEach(key => settings[key] && (values[str.snake(key)] = settings[key]))
                                 return JSON.stringify(values)
                             })()
                             return axios
-                        }, 'header.x-settings')
+                        })
                         await props.$cookie.put('settings', (() => {
                             const values = {}
                             Object.keys(settings).forEach(key => settings[key] && (values[key] = settings[key]))
