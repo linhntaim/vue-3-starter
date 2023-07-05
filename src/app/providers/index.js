@@ -9,6 +9,7 @@ import {i18n, localization} from './settings'
 import {store} from './store'
 import {router} from './router'
 import {url} from './url'
+import {bus} from './bus'
 
 // Should be maintained in order
 export const providers = {
@@ -24,4 +25,5 @@ export const providers = {
     store,
     router,
     url,
+    bus,
 }
