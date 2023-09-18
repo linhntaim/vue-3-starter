@@ -41,9 +41,16 @@ function clearCookies() {
 </script>
 
 <template lang="pug">
-h1 Clear site data
-p Including session storage, local storage and cookies.
-button(type="button" @click="onClearClick") Clear
-pre(v-if="logs.length > 0")
-    code {{ lines }}
+.center-aligned-page.clear-site-data
+    h1 Clear site data
+    p Including session storage, local storage and cookies.
+    button(type="button" @click="onClearClick") Clear
+    pre(v-if="logs.length > 0")
+        code {{ lines }}
 </template>
+
+<style lang="scss" scoped>
+pre {
+    margin-top: 1rem;
+}
+</style>
