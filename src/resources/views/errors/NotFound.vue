@@ -1,8 +1,10 @@
 <script setup>
-import {app} from '@/bootstrap/app'
 import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated} from 'vue'
 import {onBeforeRouteLeave, onBeforeRouteUpdate} from 'vue-router'
+import {useApp} from '@/bootstrap/use-app'
 import {useHead} from '@unhead/vue'
+
+const app = useApp()
 
 onBeforeRouteUpdate(() => {
     app.$log.debug('page', 'not-found.beforeRouteUpdate')

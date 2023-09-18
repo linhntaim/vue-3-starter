@@ -1,18 +1,18 @@
-import {registerPropertyFactory} from '@/app/support/helpers'
+import {getApp, registerPropertyFactory} from '../helpers'
 import {RequestManager} from './request-manager'
 
 export function createService(extend = {}) {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$request',
-                () => new RequestManager(app._instance.proxy).extend(extend),
+                () => new RequestManager(getApp(vApp)).extend(extend),
             )
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$service',
-                props => ServiceClass => props.$singleton.make(ServiceClass),
+                globalProps => ServiceClass => globalProps.$singleton.make(ServiceClass),
             )
         },
     }

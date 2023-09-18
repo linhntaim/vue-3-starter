@@ -1,8 +1,8 @@
 <script setup>
-import {getCurrentInstance} from 'vue'
 import {useHead} from '@unhead/vue'
+import {useApp} from '@/bootstrap/use-app'
 
-const app = getCurrentInstance().proxy
+const app = useApp()
 
 useHead({
     templateParams: {

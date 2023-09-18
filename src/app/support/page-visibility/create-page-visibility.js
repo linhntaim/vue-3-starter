@@ -1,9 +1,9 @@
 export function createPageVisibility() {
     return {
-        install(app) {
+        install(vApp) {
             document.addEventListener('visibilitychange', () => {
                 if (document.visibilityState === 'visible') {
-                    app.config.globalProperties.$bus.emit('pageVisible')
+                    vApp.config.globalProperties.$bus.emit('pageVisible')
                 }
             })
         },

@@ -1,13 +1,13 @@
+import {getApp, registerPropertyFactory} from '../helpers'
 import {Singleton} from './singleton'
-import {registerPropertyFactory} from '@/app/support/helpers'
 
 export function createFactory() {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$singleton',
-                () => new Singleton(app._instance.proxy),
+                () => new Singleton(getApp(vApp)),
             )
         },
     }

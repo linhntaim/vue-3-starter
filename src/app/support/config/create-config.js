@@ -3,9 +3,9 @@ import {Config} from './config'
 
 export function createConfig(configs) {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$config',
                 () => new Config(configs),
             )

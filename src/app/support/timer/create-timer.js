@@ -1,11 +1,11 @@
-import {registerPropertyFactory} from '@/app/support/helpers'
+import {registerPropertyFactory} from '../helpers'
 import {Timer} from './timer'
 
 export function createTimer() {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$timer',
                 () => new Timer(),
             )

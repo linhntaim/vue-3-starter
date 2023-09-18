@@ -1,18 +1,18 @@
-import {registerPropertyFactory} from '@/app/support/helpers'
+import {getApp, registerPropertyFactory} from '../helpers'
 import {CacheManager} from './cache-manager'
 
 export function createCache(extend = {}) {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$cacheManager',
-                () => new CacheManager(app._instance.proxy).extend(extend),
+                () => new CacheManager(getApp(vApp)).extend(extend),
             )
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$cache',
-                props => props.$cacheManager.driver(),
+                globalProps => globalProps.$cacheManager.driver(),
             )
         },
     }

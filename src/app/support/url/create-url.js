@@ -1,13 +1,13 @@
-import {registerPropertyFactory} from '@/app/support/helpers'
+import {getApp, registerPropertyFactory} from '../helpers'
 import {UrlGenerator} from './url-generator'
 
 export function createUrl() {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$url',
-                () => new UrlGenerator(app._instance.proxy),
+                () => new UrlGenerator(getApp(vApp)),
             )
         },
     }
