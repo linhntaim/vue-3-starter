@@ -54,5 +54,5 @@ export function registerGlobalPropertyFactory(Class, propertyName, getter) {
 }
 
 export const num = new Num()
-export const str = new Str()
 export const obj = new Obj()
+export const str = new Str()

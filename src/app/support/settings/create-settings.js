@@ -1,5 +1,5 @@
-import {getApp, registerPropertyFactory} from '@/app/support/helpers'
-import {Settings} from '@/app/support/settings/settings'
+import {getApp, registerPropertyFactory} from '../helpers'
+import {Settings} from './settings'
 
 export function createSettings(options = {}) {
     return {

@@ -34,4 +34,4 @@ export const settings = createSettings({
             app.$log.debug('settings', 'no need to apply')
         }
     },
-}) 
+})

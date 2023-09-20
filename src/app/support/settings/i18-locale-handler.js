@@ -23,17 +23,17 @@ export class I18LocaleHandler extends LazyLocaleHandler
                     },
                 ),
             ),
-            i18n => this.i18n = i18n.global,
+            i18n => this.i18n = i18n,
         )
     }
 
     applyLocale(locale) {
-        this.i18n.locale.value = locale
+        this.i18n.global.locale.value = locale
         return super.applyLocale(locale)
     }
-    
+
     loadLocaleData(data, locale) {
-        this.i18n.setLocaleMessage(locale, data)
+        this.i18n.global.setLocaleMessage(locale, data)
         return super.loadLocaleData(data, locale)
     }
 }
