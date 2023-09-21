@@ -1,5 +1,5 @@
 import {createRouter as baseCreateRouter, createWebHistory} from 'vue-router'
-import {take} from '../helpers'
+import {getApp, take} from '../helpers'
 import {Middlewares} from './middlewares'
 
 export function createRouter(env, options = {}) {
@@ -14,20 +14,35 @@ export function createRouter(env, options = {}) {
         ),
         router => {
             const install = router.install
-            router.install = function (app) {
-                install.call(this, app)
+            router.install = function (vApp) {
+                install.call(this, vApp)
 
                 let middlewares = null
-                const createMiddlewares = app => middlewares ? middlewares : middlewares = new Middlewares(app)
+                let app = null
 
                 this.beforeEach(
-                    (to, from, next) => createMiddlewares(app._instance.proxy).collect(to).beforeEach(to, from, next),
+                    (to, from, next) => {
+                        if (!app) {
+                            app = getApp(vApp)
+                        }
+                        if (!middlewares) {
+                            middlewares = new Middlewares(app)
+                        }
+                        app.$log.debug('router', 'beforeEach')
+                        middlewares.collect(to).beforeEach(to, from, next)
+                    },
                 )
                 this.beforeResolve(
-                    (to, from, next) => createMiddlewares(app._instance.proxy).beforeResolve(to, from, next),
+                    (to, from, next) => {
+                        app.$log.debug('router', 'beforeResolve')
+                        middlewares.beforeResolve(to, from, next)
+                    },
                 )
                 this.afterEach(
-                    (to, from) => createMiddlewares(app._instance.proxy).afterEach(to, from),
+                    (to, from) => {
+                        app.$log.debug('router', 'afterEach')
+                        middlewares.afterEach(to, from)
+                    },
                 )
             }
         },

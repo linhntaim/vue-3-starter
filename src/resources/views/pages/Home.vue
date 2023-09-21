@@ -42,10 +42,10 @@ export default {
         this.$log.debug('page', 'home.updated')
     },
     beforeMount() {
-        this.$log.debug('page', 'home.beforeMount//rendering')
+        this.$log.debug('page', 'home.beforeMount')
     },
     mounted() {
-        this.$log.debug('page', 'home.mounted//rendered')
+        this.$log.debug('page', 'home.mounted')
     },
     beforeUnmount() {
         this.$log.debug('page', 'home.beforeUnmount')

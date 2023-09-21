@@ -57,10 +57,10 @@ export default {
         this.$log.debug('page', 'about.updated')
     },
     beforeMount() {
-        this.$log.debug('page', 'about.beforeMount//rendering')
+        this.$log.debug('page', 'about.beforeMount')
     },
     mounted() {
-        this.$log.debug('page', 'about.mounted//rendered')
+        this.$log.debug('page', 'about.mounted')
     },
     beforeUnmount() {
         this.$log.debug('page', 'about.beforeUnmount')

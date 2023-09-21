@@ -1,10 +1,10 @@
-import {registerPropertyFactory, time} from '@/app/support/helpers'
+import {registerPropertyFactory, time} from '../helpers'
 
 export function createStart(vueStart) {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$start',
                 () => ({
                     fresh: 0,

@@ -1,11 +1,11 @@
-import {registerPropertyFactory} from '@/app/support/helpers'
+import {registerPropertyFactory} from '../helpers'
 import mitt from 'mitt'
 
 export function createBus() {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$bus',
                 () => mitt(),
             )

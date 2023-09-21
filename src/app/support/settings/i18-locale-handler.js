@@ -1,8 +1,8 @@
 import {createI18n} from 'vue-i18n'
 import {take} from '../helpers'
-import {LocaleHandler} from './locale-handler'
+import {LazyLocaleHandler} from './lazy-locale-handler'
 
-export class I18LocaleHandler extends LocaleHandler
+export class I18LocaleHandler extends LazyLocaleHandler
 {
     createI18Provider(env, options = {}) {
         return take(
@@ -11,9 +11,9 @@ export class I18LocaleHandler extends LocaleHandler
                     Object.assign(
                         {
                             globalInjection: true,
-                            legacy: false,
-                            locale: env.VUE_APP_I18N_LOCALE || 'en',
-                            fallbackLocale: env.VUE_APP_I18N_FALLBACK_LOCALE || 'en',
+                            legacy: true,
+                            locale: env.VITE_I18N_LOCALE || 'en',
+                            fallbackLocale: env.VITE_I18N_FALLBACK_LOCALE || 'en',
                         },
                         options || {},
                     ),
@@ -23,22 +23,17 @@ export class I18LocaleHandler extends LocaleHandler
                     },
                 ),
             ),
-            i18n => this.i18n = i18n.global,
+            i18n => this.i18n = i18n,
         )
     }
 
     applyLocale(locale) {
-        this.i18n.locale.value = locale
+        this.i18n.global.locale = locale
         return super.applyLocale(locale)
     }
 
-    setUnloadedLocale(locale) {
-        return import(/* webpackChunkName: "lang-[request]" */ `@/lang/${locale}.js`)
-            .then(messages => {
-                this.i18n.setLocaleMessage(locale, messages.default)
-                this.loadedLocales.push(locale)
-                return this.applyLocale(locale)
-            })
-            .catch(() => Promise.resolve(this.locale))
+    loadLocaleData(data, locale) {
+        this.i18n.global.setLocaleMessage(locale, data)
+        return super.loadLocaleData(data, locale)
     }
 }

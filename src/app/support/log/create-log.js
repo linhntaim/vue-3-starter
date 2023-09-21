@@ -1,18 +1,18 @@
-import {registerPropertyFactory} from '@/app/support/helpers'
+import {getApp, registerPropertyFactory} from '../helpers'
 import {LogManager} from './log-manager'
 
 export function createLog(extend = {}) {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$logManager',
-                () => new LogManager(app._instance.proxy).extend(extend),
+                () => new LogManager(getApp(vApp)).extend(extend),
             )
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$log',
-                props => props.$logManager.driver(),
+                globalProps => globalProps.$logManager.driver(),
             )
         },
     }

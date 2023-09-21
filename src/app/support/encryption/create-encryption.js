@@ -1,18 +1,18 @@
-import {registerPropertyFactory} from '@/app/support/helpers'
+import {getApp, registerPropertyFactory} from '../helpers'
 import {Encryption} from './encryption'
 
 export function createEncryption(extend = {}) {
     return {
-        install(app) {
+        install(vApp) {
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$encryption',
-                () => new Encryption(app._instance.proxy).extend(extend),
+                () => new Encryption(getApp(vApp)).extend(extend),
             )
             registerPropertyFactory(
-                app.config.globalProperties,
+                vApp.config.globalProperties,
                 '$encryptor',
-                props => props.$encryption.driver(),
+                globalProps => globalProps.$encryption.driver(),
             )
         },
     }

@@ -6,18 +6,18 @@ import App from '@/resources/views/App'
 
 export const vueStart = time()
 
-export const app = modify(createApp(App), vueApp => {
+export const app = modify(createApp(App), vApp => {
     // register mixins
-    mixins.forEach(mixin => vueApp.mixin(mixin))
+    mixins.forEach(mixin => vApp.mixin(mixin))
     // register start plugin
-    vueApp.use(createStart(vueStart))
+    vApp.use(createStart(vueStart))
     // register plugins
-    Object.keys(providers).forEach(key => vueApp.use(providers[key]))
+    Object.keys(providers).forEach(key => vApp.use(providers[key]))
 
-    return take(vueApp.mount('#app'), app => {
+    return take(vApp.mount('#app'), app => {
         // when built, `_instance` is always null (?) => must trick to proxy the app
-        if (vueApp._instance == null) {
-            vueApp._instance = {
+        if (vApp._instance == null) {
+            vApp._instance = {
                 proxy: app,
             }
         }

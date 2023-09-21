@@ -35,10 +35,10 @@ export default {
         this.$log.debug('page', 'not-found.updated')
     },
     beforeMount() {
-        this.$log.debug('page', 'not-found.beforeMount//rendering')
+        this.$log.debug('page', 'not-found.beforeMount')
     },
     mounted() {
-        this.$log.debug('page', 'not-found.mounted//rendered')
+        this.$log.debug('page', 'not-found.mounted')
     },
     beforeUnmount() {
         this.$log.debug('page', 'not-found.beforeUnmount')
