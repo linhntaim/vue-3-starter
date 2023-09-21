@@ -8,7 +8,7 @@
         "preview": "vite preview",
         "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
         "setup": "node ./scripts/setup.js",
-        "qview": "npm run build && http-server ./dist --port 90 -P \"http://localhost:90?\""
+        "qview": "npm run setup && npm run build && http-server ./dist --port 90 -P \"http://localhost:90?\""
     },
     "dependencies": {
         "@unhead/vue": "^1.7.4",
