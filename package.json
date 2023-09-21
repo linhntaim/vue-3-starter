@@ -7,7 +7,7 @@
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
         "setup": "node ./scripts/setup.js",
-        "qview": "npm run build && http-server ./dist --port 90 -P 'http://localhost:90?'"
+        "qview": "npm run setup && npm run build && http-server ./dist --port 90 -P \"http://localhost:90?\""
     },
     "dependencies": {
         "@unhead/vue": "^1.7.4",
