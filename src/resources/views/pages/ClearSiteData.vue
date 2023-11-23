@@ -1,6 +1,6 @@
 <script setup>
-import {computed, nextTick, reactive} from 'vue'
 import {useHead} from '@unhead/vue'
+import {computed, nextTick, reactive} from 'vue'
 
 useHead({
     title: 'Clear Site Data',

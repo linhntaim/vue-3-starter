@@ -6,7 +6,7 @@ if (!fs.existsSync('./.env')) {
 
 const publicVendorPath = './public/vendors'
 const vendors = {
-    './node_modules/bootstrap/dist': `${publicVendorPath}/bootstrap/dist`,
+    // './node_modules/bootstrap/dist': `${publicVendorPath}/bootstrap/dist`,
 }
 Object.keys(vendors).forEach(source => {
     if (!fs.existsSync(source)) {

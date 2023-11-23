@@ -3,9 +3,8 @@ import {Middleware} from '@/app/support/router'
 export class Fresh extends Middleware
 {
     async beforeEach(to, from, next) {
-        const fresh = this.app.$start.isFresh()
-        this.app.$start.continue()
-        if (fresh) {
+        this.app.$log.debug('middleware', 'fresh.beforeEach')
+        if (this.app.$start.isFresh()) {
             await this.restoreFromCache()
             await this.restoreFromCookie()
         }
@@ -25,8 +24,16 @@ export class Fresh extends Middleware
         // settings
         await this.app.$settings
             .set(await this.app.$cookie.get('settings', {
-                locale: this.app.$config.localization.locale.default,
+                darkMode: this.app.$config.settings.darkMode,
+                locale: this.app.$config.settings.locale.default,
             }))
             .apply()
+        //
+    }
+
+    afterEach(to, from, next) {
+        this.app.$log.debug('middleware', 'fresh.afterEach')
+        this.app.$start.continue()
+        next()
     }
 }

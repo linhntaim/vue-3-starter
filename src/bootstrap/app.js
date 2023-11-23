@@ -1,8 +1,8 @@
-import {createApp} from 'vue'
-import {createStart} from '@/app/support/start'
 import {mixins, providers} from '@/app/providers'
 import {modify, time} from '@/app/support/helpers'
+import {createStart} from '@/app/support/start'
 import App from '@/resources/views/App.vue'
+import {createApp} from 'vue'
 
 export const vueStart = time()
 

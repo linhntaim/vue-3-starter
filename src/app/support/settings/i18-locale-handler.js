@@ -4,7 +4,7 @@ import {LazyLocaleHandler} from './lazy-locale-handler'
 
 export class I18LocaleHandler extends LazyLocaleHandler
 {
-    createI18Provider(env, options = {}) {
+    createI18Provider(options = {}) {
         return take(
             createI18n(
                 take(
@@ -12,8 +12,8 @@ export class I18LocaleHandler extends LazyLocaleHandler
                         {
                             globalInjection: true,
                             legacy: false,
-                            locale: env.VITE_I18N_LOCALE || 'en',
-                            fallbackLocale: env.VITE_I18N_FALLBACK_LOCALE || 'en',
+                            locale: 'en',
+                            fallbackLocale: 'en',
                         },
                         options || {},
                     ),

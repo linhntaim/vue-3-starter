@@ -64,7 +64,7 @@ export class Middlewares extends Maker
     after(method, to, from) {
         const middlewares = this.getMiddlewares()
         const handle = () => {
-            const MiddlewareClass = middlewares.shift()
+            const MiddlewareClass = middlewares.pop()
             if (MiddlewareClass) {
                 const middleware = this.getMiddleware(MiddlewareClass)
                 if (method in middleware) {

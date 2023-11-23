@@ -1,5 +1,5 @@
-import {Storage} from './storage'
 import Cookies from 'js-cookie'
+import {Storage} from './storage'
 
 export class CookieStorage extends Storage
 {

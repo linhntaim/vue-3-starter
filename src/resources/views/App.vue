@@ -1,6 +1,6 @@
 <script setup>
-import {useHead} from '@unhead/vue'
 import {useApp} from '@/bootstrap/use-app'
+import {useHead} from '@unhead/vue'
 
 const app = useApp()
 

@@ -1,37 +1,24 @@
-import {env, localization as config} from '@/config'
 import {createSettings, I18LocaleHandler} from '@/app/support/settings'
+import {settings as config} from '@/config'
 
 const localeHandler = new I18LocaleHandler(
     locale => import(`../../../lang/${locale}.js`).then(messages => messages.default),
     config.locale.supported,
 )
 
-export const i18n = localeHandler.createI18Provider(env, {
+export const i18n = localeHandler.createI18Provider({
     locale: config.locale.default,
     fallbackLocale: config.locale.fallback,
 })
 export const settings = createSettings({
     localeHandler,
-    localeApply: function (locale, changed, app) {
-        if (changed) {
-            document.querySelector('html').setAttribute('lang', locale)
-            app.$log.debug('locale', 'applied', locale)
-        }
-        else {
-            app.$log.debug('locale', 'no need to apply')
-        }
+    onDarkModeChange(event) {
+        document.documentElement.setAttribute('data-bs-theme', event.newDarkMode ? 'dark' : 'light')
     },
-    commonApply: async function (settings, changes, app) {
-        if (Object.keys(changes).some(key => changes[key])) {
-            await app.$cookie.put('settings', (() => {
-                const values = {}
-                Object.keys(settings).forEach(key => settings[key] && (values[key] = settings[key]))
-                return values
-            })())
-            app.$log.debug('settings', 'applied', settings)
-        }
-        else {
-            app.$log.debug('settings', 'no need to apply')
-        }
+    onLocaleChange(event) {
+        document.documentElement.setAttribute('lang', event.newLocale)
+    },
+    onChange(event) {
+        event.target.app.$cookie.put('settings', event.newSettings)
     },
 })

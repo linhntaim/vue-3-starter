@@ -1,7 +1,7 @@
 import {createRouter} from '@/app/support/router'
-import {env} from '@/config'
+import {app as config} from '@/config'
 import {routes} from '@/routes'
 
-export const router = createRouter(env, {
+export const router = createRouter(config.baseUrl, {
     routes,
 })

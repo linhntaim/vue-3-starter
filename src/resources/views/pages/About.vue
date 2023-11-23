@@ -1,8 +1,8 @@
 <script setup>
-import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated, ref, watch} from 'vue'
-import {onBeforeRouteLeave, onBeforeRouteUpdate} from 'vue-router'
 import {useApp} from '@/bootstrap/use-app'
 import {useHead} from '@unhead/vue'
+import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated, ref, watch} from 'vue'
+import {onBeforeRouteLeave, onBeforeRouteUpdate} from 'vue-router'
 
 const app = useApp()
 
@@ -36,8 +36,8 @@ useHead({
 })
 
 const world = ref('World')
-const locale = ref(app.$i18n.locale)
-const locales = app.$config.localization.locale.supported
+const locale = ref(app.$getLocale())
+const locales = app.$config.settings.locale.supported
 
 watch(locale, () => app.$setLocale(locale.value))
 </script>

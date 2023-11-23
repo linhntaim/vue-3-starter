@@ -1,5 +1,5 @@
-import {registerPropertyFactory} from '../helpers'
 import mitt from 'mitt'
+import {registerPropertyFactory} from '../helpers'
 
 export function createBus() {
     return {
