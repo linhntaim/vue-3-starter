@@ -1,19 +1,7 @@
 import {middlewares} from '@/app/middlewares'
 import Base from '@/resources/views/master/Base.vue'
 import BaseBlank from '@/resources/views/master/BaseBlank.vue'
-
-const viewNotFound = () => import('@/resources/views/errors/NotFound.vue')
-const fallbackRoute = {
-    path: ':pathMatch(.*)*',
-    component: viewNotFound,
-}
-const rootIncludedFallbackRoute = [
-    {
-        path: '',
-        component: viewNotFound,
-    },
-    fallbackRoute,
-]
+import {loadNotFoundView, makeFallbackRoute} from './helpers'
 
 export const routes = [
     {
@@ -35,10 +23,10 @@ export const routes = [
                     {
                         path: '404',
                         name: 'not_found',
-                        component: viewNotFound,
+                        component: loadNotFoundView,
                     },
                     //
-                    ...rootIncludedFallbackRoute,
+                    ...makeFallbackRoute(true),
                 ],
             },
             {
@@ -53,7 +41,7 @@ export const routes = [
                 component: () => import('@/resources/views/pages/About.vue'),
             },
             //
-            fallbackRoute,
+            makeFallbackRoute(false),
         ],
     },
 ]

@@ -1,10 +1,12 @@
 <script setup>
 import {useApp} from '@/starter/app'
+import {usePageTitle} from '@/starter/page-title'
 import {useHead} from '@unhead/vue'
 import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated} from 'vue'
 import {onBeforeRouteLeave, onBeforeRouteUpdate} from 'vue-router'
 
 const app = useApp()
+const pageTitle = usePageTitle('404 - Not found')
 
 onBeforeRouteUpdate(() => {
     app.$log.debug('page', 'not-found.beforeRouteUpdate')
@@ -32,7 +34,7 @@ onUnmounted(() => {
 })
 
 useHead({
-    title: '404 - Not found',
+    title: () => pageTitle.toString(),
 })
 </script>
 
