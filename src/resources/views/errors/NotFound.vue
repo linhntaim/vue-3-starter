@@ -1,5 +1,5 @@
 <script setup>
-import {useApp} from '@/bootstrap/use-app'
+import {useApp} from '@/starter/app'
 import {useHead} from '@unhead/vue'
 import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated} from 'vue'
 import {onBeforeRouteLeave, onBeforeRouteUpdate} from 'vue-router'

@@ -1,10 +1,13 @@
 <script setup>
-import {useApp} from '@/bootstrap/use-app'
+import {useApp} from '@/starter/app'
+import {usePageTitle} from '@/starter/page-title'
+import {useDarkMode} from '@/starter/settings'
 import {useHead} from '@unhead/vue'
 import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated, ref, watch} from 'vue'
 import {onBeforeRouteLeave, onBeforeRouteUpdate} from 'vue-router'
 
 const app = useApp()
+const pageTitle = usePageTitle('About')
 
 onBeforeRouteUpdate(() => {
     app.$log.debug('page', 'about.beforeRouteUpdate')
@@ -32,7 +35,7 @@ onUnmounted(() => {
 })
 
 useHead({
-    title: 'About',
+    title: () => pageTitle.toString(),
 })
 
 const world = ref('World')
@@ -40,6 +43,8 @@ const locale = ref(app.$getLocale())
 const locales = app.$config.settings.locale.supported
 
 watch(locale, () => app.$setLocale(locale.value))
+
+const {value: darkMode, toggle: toggleDarkMode} = useDarkMode()
 </script>
 
 <template lang="pug">
@@ -54,4 +59,6 @@ watch(locale, () => app.$setLocale(locale.value))
                 option(v-for="value in locales" :key="value" :value="value")
                     | {{ value }}
     p {{ $t('hello', {world: world}) }}
+    p
+        button(@click="toggleDarkMode") Dark mode: {{ darkMode ? 'ON' : 'OFF' }}
 </template>

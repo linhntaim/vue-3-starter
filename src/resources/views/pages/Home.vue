@@ -1,11 +1,13 @@
 <script setup>
-import {useApp} from '@/bootstrap/use-app'
+import {useApp} from '@/starter/app'
+import {usePageTitle} from '@/starter/page-title'
 import {useHead} from '@unhead/vue'
 import {onBeforeMount, onBeforeUnmount, onBeforeUpdate, onMounted, onUnmounted, onUpdated} from 'vue'
 import {onBeforeRouteLeave, onBeforeRouteUpdate} from 'vue-router'
 import TheWelcome from '../components/TheWelcome.vue'
 
 const app = useApp()
+const pageTitle = usePageTitle('Home')
 
 onBeforeRouteUpdate(() => {
     app.$log.debug('page', 'home.beforeRouteUpdate')
@@ -33,7 +35,7 @@ onUnmounted(() => {
 })
 
 useHead({
-    title: 'Home',
+    title: () => pageTitle.toString(),
 })
 </script>
 

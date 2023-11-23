@@ -1,3 +1,7 @@
 import dotenvConversion from 'dotenv-conversion'
 
-export const _env = dotenvConversion.convert({parsed: import.meta.env, ignoreProcessEnv: true}).parsed
+const parsed = dotenvConversion.convert({parsed: import.meta.env, ignoreProcessEnv: true}).parsed
+
+export function _env(key, def = null) {
+    return key in parsed ? parsed[key] : def
+}

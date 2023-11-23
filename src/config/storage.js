@@ -1,4 +1,4 @@
-import {app} from '@/config/app'
+import {app} from './app'
 
 export const storage = {
     default: 'local',
