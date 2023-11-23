@@ -50,15 +50,19 @@ const {value: darkMode, toggle: toggleDarkMode} = useDarkMode()
 <template lang="pug">
 .center-aligned-page.about
     h1 This is an about page
-    p
-        small Say hello to&nbsp;
-        input(v-model="world" type="text")
+    p.row.row-cols-sm-auto.g-3.align-items-center.justify-content-center.justify-content-lg-start.row-cols-auto
+        .col-12
+            small Say hello to&nbsp;
+        .col-12
+            input.form-control(v-model="world" type="text")
         template(v-if="locales.length > 1")
-            small &nbsp;in&nbsp;
-            select(v-model="locale")
-                option(v-for="value in locales" :key="value" :value="value")
-                    | {{ value }}
+            .col-12
+                small &nbsp;in&nbsp;
+            .col-12
+                select.form-select(v-model="locale")
+                    option(v-for="value in locales" :key="value" :value="value")
+                        | {{ value }}
     p {{ $t('hello', {world: world}) }}
     p
-        button(@click="toggleDarkMode") Dark mode: {{ darkMode ? 'ON' : 'OFF' }}
+        button.btn.btn-primary(@click="toggleDarkMode") Dark mode: {{ darkMode ? 'ON' : 'OFF' }}
 </template>
